@@ -30,5 +30,7 @@ cc_binary(
         "@llvm-project//mlir:Pass",
         "@llvm-project//mlir:SCFToControlFlow",
         "@llvm-project//mlir:TensorToLinalg",
+        "@llvm-project//mlir:SparseTensorPipelines",
+        "@llvm-project//mlir:SparseTensorTransforms",
     ],
 )

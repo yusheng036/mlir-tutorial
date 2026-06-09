@@ -1,10 +1,14 @@
 common --enable_bzlmod
+# Force Apple Clang to avoid ABI mismatch: Homebrew LLVM 21 compiles against its own libc++
+# headers but the linker uses Apple's libc++.dylib, causing missing __hash_memory symbols.
+build --repo_env=CC=/usr/bin/clang
+build --repo_env=CXX=/usr/bin/clang++
 common --action_env=BAZEL_CXXOPTS=-std=c++17
 common --cxxopt='-std=c++17'
 common --deleted_packages=externals
 build:macos --apple_platform_type=macos
-build:macos --macos_minimum_os=10.13
-build:macos --macos_sdk_version=10.13
+build:macos --macos_minimum_os=10.15
+build:macos --macos_sdk_version=10.15
 build:macos_arm64 --cpu=darwin_arm64
 common --copt=-fdiagnostics-color=always
 common --test_output=errors

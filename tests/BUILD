@@ -16,6 +16,8 @@ filegroup(
         "@llvm-project//mlir:mlir-runner",
         "@llvm-project//mlir:mlir-opt",
         "@llvm-project//mlir:mlir-translate",
+        "@llvm-project//mlir:libmlir_c_runner_utils.so",
+        "@llvm-project//mlir:libmlir_runner_utils.so",
         "@mlir_tutorial_pip_deps//lit",
     ],
 )
