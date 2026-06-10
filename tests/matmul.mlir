@@ -1,4 +1,4 @@
-// RUN: tutorial-opt %s --sparsifier="enable-runtime-library=true" | %mlir_runner | FileCheck %s
+// RUN: tutorial-opt %s --sparsifier="enable-runtime-library=true" | mlir-runner -e main -entry-point-result=void -shared-libs=../../+_repo_rules+llvm-project/mlir/libmlir_c_runner_utils.so,../../+_repo_rules+llvm-project/mlir/libmlir_runner_utils.so | FileCheck %s
 
 #CSR = #sparse_tensor.encoding<{map = (d0, d1) -> (d0 : dense, d1 : compressed)}>
 
