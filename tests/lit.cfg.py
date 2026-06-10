@@ -33,7 +33,7 @@ runfiles_dir = Path(os.environ["RUNFILES_DIR"])
 # Fix tool paths to use _main instead of mlir_tutorial
 tool_relpaths = [
     "+_repo_rules+llvm-project/mlir",
-    "+_repo_rules+llvm-project/llvm",
+    "+_repo_rules+llvm-project/llvm", 
     "_main/tools",
 ]
 
@@ -43,7 +43,11 @@ config.environment["PATH"] = (
     + os.environ["PATH"]
 )
 
+mlir_lib_dir = str(runfiles_dir.joinpath(Path("+_repo_rules+llvm-project/mlir")))
+mlir_libs = f"-shared-libs={mlir_lib_dir}/libmlir_c_runner_utils.so,{mlir_lib_dir}/libmlir_runner_utils.so"
+
 substitutions = {
     "%project_source_dir": str(runfiles_dir.joinpath(Path('_main'))),
+    "%mlir_runner": f"mlir-runner -e main -entry-point-result=void {mlir_libs}",
 }
 config.substitutions.extend(substitutions.items())
