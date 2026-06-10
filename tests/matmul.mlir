@@ -19,7 +19,7 @@ module {
 
 
   //
-  // Main driver.
+  // Main driver
   //
   func.func @main() {
     %d1 = arith.constant sparse<[[0,0],[1,1],[2,2]], [1.0, 2.0, 3.0]> : tensor<3x3xf32>
@@ -49,8 +49,7 @@ module {
     sparse_tensor.print %s2 : tensor<3x3xf32, #CSR>
 
 
-    %0 = call @sparse_matmul(%s1, %s2) : (tensor<3x3xf32, #CSR>,
-                                          tensor<3x3xf32, #CSR>) -> tensor<3x3xf32, #CSR>
+    %0 = call @sparse_matmul(%s1, %s2) : (tensor<3x3xf32, #CSR>, tensor<3x3xf32, #CSR>) -> tensor<3x3xf32, #CSR>
 
     // CHECK:      ---- Sparse Tensor ----
     // CHECK-NEXT: nse = 3
@@ -67,6 +66,7 @@ module {
     bufferization.dealloc_tensor %0  : tensor<3x3xf32, #CSR>
     bufferization.dealloc_tensor %s1 : tensor<3x3xf32, #CSR>
     bufferization.dealloc_tensor %s2 : tensor<3x3xf32, #CSR>
+
     return
   }
 }
